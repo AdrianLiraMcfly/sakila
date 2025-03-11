@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Inventory;
+use App\Models\Store;
+use App\Models\Film;
+
+class InventoryController extends Controller
+{
+    public function index()
+    {
+        $inventories = Inventory::paginate(10);
+        $stores = Store::all();
+        $films = Film::all();
+        return view('inventories.index', compact('inventories', 'stores', 'films'));
+    }
+    public function create()
+    {
+        return view('inventories.create');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'store_id' => 'required',
+            'film_id' => 'required',
+        ]);
+        Inventory::create($request->all());
+        return redirect()->route('inventories.index');
+    }
+    public function edit(Inventory $inventory)
+    {
+        return view('inventories.edit', compact('inventory'));
+    }
+    public function update(Request $request, Inventory $inventory)
+    {
+        $request->validate([
+            'store_id' => 'required',
+            'film_id' => 'required',
+        ]);
+        $inventory->update($request->all());
+        return redirect()->route('inventories.index');
+    }
+    public function destroy(Inventory $inventory)
+    {
+        $inventory->delete();
+        return redirect()->route('inventories.index');
+    }
+}
