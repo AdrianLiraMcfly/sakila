@@ -21,4 +21,14 @@ class Customer extends Model
         'create_date',
         'last_update',
     ];
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'store_id');
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'address_id');
+    }
 }

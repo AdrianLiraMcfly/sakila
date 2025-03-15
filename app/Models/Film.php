@@ -24,4 +24,6 @@ class Film extends Model
         'special_features',
         'category_id',
     ];
+
+    
 }

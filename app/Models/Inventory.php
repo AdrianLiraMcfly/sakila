@@ -15,4 +15,9 @@ class Inventory extends Model
         'film_id',
         'store_id',
     ];
+
+    public function film()
+    {
+        return $this->belongsTo(Film::class, 'film_id');
+    }
 }

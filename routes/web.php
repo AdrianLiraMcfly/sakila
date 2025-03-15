@@ -16,7 +16,7 @@ use App\Http\Controllers\paymentController;
 use App\Http\Controllers\rentalController;
 use App\Http\Controllers\staffController;
 use App\Http\Controllers\storeController;
-
+use App\Http\Controllers\homecontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,8 @@ use App\Http\Controllers\storeController;
 |
 */
 
-Route::get('/', [actorController::class, 'index']);
+Route::get('/', [homecontroller::class, 'index'])->name('home');
+
 Route::get('/actors', [actorController::class, 'index'])->name('actors.index');
 Route::get('/actors/create', [actorController::class, 'create'])->name('actors.create');
 Route::post('/actors', [actorController::class, 'store'])->name('actors.store');

@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Address;
+use App\Models\City;
 
 class adressController extends Controller
 {
     public function index()
     {
         $adresses = Address::paginate(10);
-        return view('adresses.index', compact('adresses'));
+        $cities = City::all();
+        return view('adresses.index', compact('adresses', 'cities'));
     }
 
     public function show(Address $adress)

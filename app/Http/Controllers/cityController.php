@@ -12,8 +12,9 @@ class cityController extends Controller
     {
         $cities = city::paginate(10);
         $countries = country::all();
-        return view('cities.index', compact('cities'));
+        return view('cities.index', compact('cities', 'countries'));
     }
+    
     public function create()
     {
         $countries = country::all();

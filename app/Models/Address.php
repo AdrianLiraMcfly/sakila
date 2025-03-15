@@ -19,4 +19,9 @@ class Address extends Model
         'postal_code',
         'phone',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
 }

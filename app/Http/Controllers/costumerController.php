@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\customer;
+use App\Models\address;
+use App\Models\store;
+
 class costumerController extends Controller
 {
     public function index()
     {
         $costumers = customer::paginate(10);
-        return view('costumers.index', compact('costumers'));
+        $addres = address::all();
+        $store = store::all();
+        return view('costumers.index', compact('costumers', 'addres', 'store'));
     }
     public function create()
     {

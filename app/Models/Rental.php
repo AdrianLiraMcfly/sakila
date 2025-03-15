@@ -20,4 +20,17 @@ class Rental extends Model
         'staff_id',
         'last_update',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    /**
+     * Relación con el modelo Film (un alquiler tiene una película).
+     */
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class, 'staff_id');
+    }
 }

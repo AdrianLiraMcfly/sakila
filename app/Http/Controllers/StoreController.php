@@ -12,9 +12,9 @@ class StoreController extends Controller
     public function index()
     {
         $stores = Store::paginate(10);
-        $staffs = Staff::all();
-        $addresses = Address::all();
-        return view('stores.index', compact('stores', 'staffs', 'addresses'));
+        $staff = Staff::all();
+        $address = Address::all();
+        return view('stores.index', compact('stores', 'staff', 'address'));
     }
     public function create()
     {

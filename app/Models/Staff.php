@@ -21,4 +21,9 @@ class Staff extends Model
         'username',
         'password',
     ];
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'address_id');
+    }
 }

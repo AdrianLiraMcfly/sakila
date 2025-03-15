@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Staff;
 use App\Models\Store;
+use App\Models\Address;
 
 class StaffController extends Controller
 {
@@ -12,7 +13,8 @@ class StaffController extends Controller
     {
         $staffs = Staff::paginate(10);
         $stores = Store::all();
-        return view('staffs.index', compact('staffs', 'stores'));
+        $address = Address::all();
+        return view('staffs.index', compact('staffs', 'address', 'stores'));
     }
     public function create()
     {
