@@ -49,7 +49,7 @@
                                         <td>{{ $costumer->last_name }}</td>
                                         <td>{{ $costumer->email }}</td>
                                         <td>{{ $costumer->address->address }}</td>
-                                        <td>{{ $costumer->active }}</td>
+                                        <td>{{ $costumer->active ? 'Active' : 'Inactive' }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('customers.edit', $costumer->customer_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>

@@ -31,8 +31,15 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="store">Store</label>
-                            <input type="text" class="form-control @error('store') is-invalid @enderror" 
-                                id="store" name="store" value="{{ old('store', $customer->store_id) }}" placeholder="Enter store">
+                            <select class="form-control @error('store') is-invalid @enderror" 
+                                    id="store" name="store" required>
+                                <option value="">Select a Store</option>
+                                @foreach($stores as $store)
+                                    <option value="{{ $store->store_id }}" {{ old('store', $customer->store_id) == $store->store_id ? 'selected' : '' }}>
+                                        {{ $store->store_id }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('store')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -67,8 +74,15 @@
 
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control @error('address') is-invalid @enderror" 
-                                id="address" name="address" value="{{ old('address', $customer->address_id) }}" placeholder="Enter address">
+                            <select class="form-control @error('address') is-invalid @enderror" 
+                                    id="address" name="address" required>
+                                <option value="">Select an Address</option>
+                                @foreach($addresses as $address)
+                                    <option value="{{ $address->address_id }}" {{ old('address', $customer->address_id) == $address->address_id ? 'selected' : '' }}>
+                                        {{ $address->address }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('address')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -76,8 +90,11 @@
 
                         <div class="form-group">
                             <label for="active">Active</label>
-                            <input type="text" class="form-control @error('active') is-invalid @enderror" 
-                                id="active" name="active" value="{{ old('active', $customer->active) }}" placeholder="Enter active status">
+                            <select class="form-control @error('active') is-invalid @enderror" 
+                                    id="active" name="active" required>
+                                <option value="">Select an Option</option>
+                                <option value="1" {{ old('active', $customer->active) == 1 ? 'selected' : '' }}>Yes</option>
+                                <option value="0" {{ old('active', $customer->active) == 0 ? 'selected' : '' }}>No</option>
                             @error('active')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

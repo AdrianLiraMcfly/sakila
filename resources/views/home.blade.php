@@ -22,6 +22,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                
                 <!-- Widget: Total de Actores -->
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
@@ -74,52 +75,63 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>44</h3>
-                            <p>Notifications</p>
+                            <h3>{{ $customers_count }}</h3>
+                            <p>Total Customers</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-bell"></i>
+                            <i class="fas fa-user"></i> <!-- Cambia el ícono a uno que represente clientes -->
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ route('customers.index') }}" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
                 </div>
-            </div>
 
+            <!-- Gráfico de Películas por Categoría -->
+                    <div class="container">
+            <div class="row">
+                <div class="col-md-12">
             <!-- Gráfico de Películas por Categoría -->
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Films per Category</h3>
                 </div>
                 <div class="card-body">
-                    <canvas id="filmsChart"></canvas>
+                    <div class="chart">
+                        <canvas id="filmsChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-            <!-- Script para el gráfico -->
+            <!-- Script para inicializar el gráfico -->
             <script>
-                var ctx = document.getElementById('filmsChart').getContext('2d');
-                var filmsChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: {!! json_encode($categories) !!},
-                        datasets: [{
-                            label: 'Films Count',
-                            data: {!! json_encode($films_per_category) !!},
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: { beginAtZero: true }
-                        }
-                    }
-                });
-            </script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById('filmsChart').getContext('2d');
+        var filmsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($categories->pluck('name')) !!},
+                datasets: [{
+                    label: 'Films Count',
+                    data: {!! json_encode(array_values($films_per_category)) !!},
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    });
+</script>
 
             <!-- Tabla de Últimos Alquileres -->
             <div class="card">
@@ -150,44 +162,4 @@
                 </div>
             </div>
 
-            <!-- Tarjeta de Bienvenida -->
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <h3 class="card-title"><i class="fas fa-info-circle"></i> Welcome</h3>
-                </div>
-                <div class="card-body">
-                    <p>Welcome to the Admin Dashboard. Use the navigation to manage your content.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-<!-- Canvas para el gráfico -->
-<canvas id="filmsChart"></canvas>
-
-<!-- Script para inicializar el gráfico -->
-<script>
-    var ctx = document.getElementById('filmsChart').getContext('2d');
-    var filmsChart = new Chart(ctx, {
-        type: 'bar', // Tipo de gráfico (bar, line, pie, etc.)
-        data: {
-            labels: {!! json_encode($categories) !!}, // Etiquetas (categorías)
-            datasets: [{
-                label: 'Films Count', // Etiqueta del dataset
-                data: {!! json_encode($films_per_category) !!}, // Datos (cantidad de películas por categoría)
-                backgroundColor: 'rgba(54, 162, 235, 0.5)', // Color de fondo
-                borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
-                borderWidth: 1 // Ancho del borde
-            }]
-        },
-        options: {
-            responsive: true, // Hace que el gráfico sea responsive
-            scales: {
-                y: {
-                    beginAtZero: true // Comienza el eje Y desde cero
-                }
-            }
-        }
-    });
-</script>
 @endsection

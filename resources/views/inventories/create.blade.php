@@ -30,8 +30,13 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="film_id">Film</label>
-                            <input type="text" class="form-control @error('film_id') is-invalid @enderror" 
-                                id="film_id" name="film_id" value="{{ old('film_id') }}" placeholder="Enter film ID">
+                            <select class="form-control @error('film_id') is-invalid @enderror" 
+                                id="film_id" name="film_id">
+                                <option value="">Select Film</option>
+                                @foreach ($films as $film)
+                                    <option value="{{ $film->film_id }}">{{ $film->title }}</option>
+                                @endforeach
+                            </select>
                             @error('film_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -39,8 +44,13 @@
 
                         <div class="form-group">
                             <label for="store_id">Store</label>
-                            <input type="text" class="form-control @error('store_id') is-invalid @enderror" 
-                                id="store_id" name="store_id" value="{{ old('store_id') }}" placeholder="Enter store ID">
+                            <select class="form-control @error('store_id') is-invalid @enderror" 
+                                id="store_id" name="store_id">
+                                <option value="">Select Store</option>
+                                @foreach ($stores as $store)
+                                    <option value="{{ $store->store_id }}">{{ $store->store_id }}</option>
+                                @endforeach
+                            </select>
                             @error('store_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

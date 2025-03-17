@@ -56,11 +56,17 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label for="language">Language</label>
-                            <input type="text" class="form-control @error('language') is-invalid @enderror" 
-                                id="language" name="language" value="{{ old('language', $film->language_id) }}" placeholder="Enter language">
-                            @error('language')
+                        <div class="form-group
+                            <label for="language_id">Language</label>
+                            <select name="language_id" id="language_id" class="form-control" required>
+                                <option value="">Select Language</option>
+                                @foreach ($languages as $language)
+                                    <option value="{{ $language->language_id }}" {{ old('language_id', $film->language_id) == $language->language_id ? 'selected' : '' }}>
+                                        {{ $language->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('language_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>

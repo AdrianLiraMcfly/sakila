@@ -24,8 +24,10 @@ class LanguageController extends Controller
     }
     public function edit(Language $language)
     {
-        return view('languages.edit', compact('language'));
+        $languages = Language::all();
+        return view('languages.edit', compact('language', 'languages'));
     }
+    
     public function update(Request $request, Language $language)
     {
         $request->validate([

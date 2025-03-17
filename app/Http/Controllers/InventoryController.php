@@ -18,7 +18,9 @@ class InventoryController extends Controller
     }
     public function create()
     {
-        return view('inventories.create');
+        $stores = Store::all();
+        $films = Film::all();
+        return view('inventories.create', compact('stores', 'films'));
     }
     public function store(Request $request)
     {
@@ -31,7 +33,9 @@ class InventoryController extends Controller
     }
     public function edit(Inventory $inventory)
     {
-        return view('inventories.edit', compact('inventory'));
+        $stores = Store::all();
+        $films = Film::all();
+        return view('inventories.edit', compact('inventory', 'stores', 'films'));
     }
     public function update(Request $request, Inventory $inventory)
     {

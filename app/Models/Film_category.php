@@ -15,4 +15,14 @@ class Film_category extends Model
         'film_id',
         'category_id',
     ];
+
+    public function film()
+    {
+        return $this->belongsTo(Film::class, 'film_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

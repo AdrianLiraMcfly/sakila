@@ -43,9 +43,6 @@
                                         <td>{{ $category->category_id }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('categories.show', $category->category_id) }}" class="btn btn-info btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
                                             <a href="{{ route('categories.edit', $category->category_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>

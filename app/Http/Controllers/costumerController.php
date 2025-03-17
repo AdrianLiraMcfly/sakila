@@ -18,7 +18,9 @@ class costumerController extends Controller
     }
     public function create()
     {
-        return view('costumers.create');
+        $addresses = address::all();
+        $stores = store::all();
+        return view('costumers.create', compact('addresses', 'stores'));
     }
     public function store(Request $request)
     {
@@ -34,7 +36,9 @@ class costumerController extends Controller
     }
     public function edit(customer $customer)
     {
-        return view('costumers.edit', compact('customer'));
+        $addresses = address::all();
+        $stores = store::all();
+        return view('costumers.edit', compact('customer', 'addresses', 'stores'));
     }
     public function update(Request $request, customer $customer)
     {

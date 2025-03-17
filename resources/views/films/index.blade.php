@@ -57,11 +57,8 @@
                                         <td>{{ $film->length }}</td>
                                         <td>{{ $film->replacement_cost }}</td>
                                         <td>{{ $film->special_features }}</td>
-                                        <td>{{ $film->language_id }}</td>
+                                        <td>{{ $film->language ? $film->language->name : 'No Language' }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('films.show', $film->film_id) }}" class="btn btn-info btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
                                             <a href="{{ route('films.edit', $film->film_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>

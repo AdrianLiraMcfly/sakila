@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\film;
-use App\Models\language;
-use App\Models\category;
+use App\Models\Language;
+use App\Models\Category;
 
 class filmController extends Controller
 {
     public function index()
-    {
-        $films = film::paginate(10);
-        $languages = language::all();
-        $categories = category::all();
-        return view('films.index', compact('films', 'languages', 'categories'));
-    }
+        {
+            $films = Film::with(['category', 'language'])->paginate(10); // Cargar relaciones
+            $languages = Language::all();
+            $categories = Category::all();
+            return view('films.index', compact('films', 'languages', 'categories'));
+        }
+
     public function create()
     {
-        return view('films.create');
+        $languages = Language::all();
+        return view('films.create', compact('languages'));
     }
     public function store(Request $request)
     {
@@ -39,7 +41,8 @@ class filmController extends Controller
     }
     public function edit(film $film)
     {
-        return view('films.edit', compact('film'));
+        $languages = Language::all();
+        return view('films.edit', compact('film', 'languages'));
     }
     public function update(Request $request, film $film)
     {

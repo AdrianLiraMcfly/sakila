@@ -39,12 +39,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="country_id">Country</label>
+                            <label for="contry_id">Country</label>
                             <select name="country_id" id="country_id" 
                                 class="form-control @error('country_id') is-invalid @enderror">
-                                @foreach($countries as $country)
-                                    <option value="{{ $country->id }}" {{ old('country_id') == $country->id ? 'selected' : '' }}>
-                                        {{ $country->name }}
+                                <option value="">Select Country</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}"> {{$country->country}}
                                     </option>
                                 @endforeach
                             </select>
@@ -52,7 +52,6 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
 
                     <div class="card-footer d-flex justify-content-between">
                         <a href="{{ route('city.index') }}" class="btn btn-secondary">

@@ -47,11 +47,11 @@
                                     <tr>
                                         <td>{{ $adress->address_id }}</td>
                                         <td>{{ $adress->address }}</td>
-                                        <td>{{ $adress->address2 }}</td>
+                                        <td>{{ $adress->address2 ? $adress->address2 : 'No Data' }}</td>
                                         <td>{{ $adress->district }}</td>
                                         <td>{{ $adress->city->city }}</td>
-                                        <td>{{ $adress->postal_code }}</td>
-                                        <td>{{ $adress->phone }}</td>
+                                        <td>{{ $adress->postal_code ? $adress->postal_code : 'No Postal Code' }}</td>
+                                        <td>{{ $adress->phone ? $adress->phone : 'No Phone'}}</td>
                                         <td class="text-center">
                                             <a href="{{ route('adresses.edit', $adress->address_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
