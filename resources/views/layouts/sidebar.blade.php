@@ -82,7 +82,7 @@
 
                         <!-- Countries -->
                         <li class="nav-item">
-                            <a href="{{ route('countries.index') }}" class="nav-link {{ Request::is('countries*') ? 'active' : '' }}">
+                            <a href="{{ route('countries.index') }}" class="nav-link {{ Request::is('country*') ? 'active' : '' }}">
                                 <i class="nav-icon far fa-circle text-success"></i>
                                 <p>Countries</p>
                             </a>
@@ -90,7 +90,7 @@
 
                         <!-- Customers -->
                         <li class="nav-item">
-                            <a href="{{ route('customers.index') }}" class="nav-link {{ Request::is('customers*') ? 'active' : '' }}">
+                            <a href="{{ route('customers.index') }}" class="nav-link {{ Request::is('customer*') ? 'active' : '' }}">
                                 <i class="nav-icon far fa-circle text-success"></i>
                                 <p>Customers</p>
                             </a>
@@ -98,7 +98,7 @@
 
                         <!-- Inventories -->
                         <li class="nav-item">
-                            <a href="{{ route('inventories.index') }}" class="nav-link {{ Request::is('inventories*') ? 'active' : '' }}">
+                            <a href="{{ route('inventories.index') }}" class="nav-link {{ Request::is('inventory*') ? 'active' : '' }}">
                                 <i class="nav-icon far fa-circle text-success"></i>
                                 <p>Inventories</p>
                             </a>
@@ -106,7 +106,7 @@
 
                         <!-- Languages -->
                         <li class="nav-item">
-                            <a href="{{ route('languages.index') }}" class="nav-link {{ Request::is('languages*') ? 'active' : '' }}">
+                            <a href="{{ route('languages.index') }}" class="nav-link {{ Request::is('language*') ? 'active' : '' }}">
                                 <i class="nav-icon far fa-circle text-success"></i>
                                 <p>Languages</p>
                             </a>
@@ -114,7 +114,7 @@
 
                         <!-- Payments -->
                         <li class="nav-item">
-                            <a href="{{ route('payments.index') }}" class="nav-link {{ Request::is('payments*') ? 'active' : '' }}">
+                            <a href="{{ route('payments.index') }}" class="nav-link {{ Request::is('payment*') ? 'active' : '' }}">
                                 <i class="nav-icon far fa-circle text-success"></i>
                                 <p>Payments</p>
                             </a>
@@ -122,7 +122,7 @@
 
                         <!-- Rentals -->
                         <li class="nav-item">
-                            <a href="{{ route('rentals.index') }}" class="nav-link {{ Request::is('rentals*') ? 'active' : '' }}">
+                            <a href="{{ route('rentals.index') }}" class="nav-link {{ Request::is('rental*') ? 'active' : '' }}">
                                 <i class="nav-icon far fa-circle text-success"></i>
                                 <p>Rentals</p>
                             </a>
@@ -130,7 +130,7 @@
 
                         <!-- Staffs -->
                         <li class="nav-item">
-                            <a href="{{ route('staffs.index') }}" class="nav-link {{ Request::is('staffs*') ? 'active' : '' }}">
+                            <a href="{{ route('staffs.index') }}" class="nav-link {{ Request::is('staff*') ? 'active' : '' }}">
                                 <i class="nav-icon far fa-circle text-success"></i>
                                 <p>Staffs</p>
                             </a>
@@ -138,7 +138,7 @@
 
                         <!-- Stores -->
                         <li class="nav-item">
-                            <a href="{{ route('stores.index') }}" class="nav-link {{ Request::is('stores*') ? 'active' : '' }}">
+                            <a href="{{ route('stores.index') }}" class="nav-link {{ Request::is('store*') ? 'active' : '' }}">
                                 <i class="nav-icon far fa-circle text-success"></i>
                                 <p>Stores</p>
                             </a>
