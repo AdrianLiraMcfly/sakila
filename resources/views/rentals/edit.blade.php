@@ -40,8 +40,16 @@
 
                         <div class="form-group">
                             <label for="inventory_id">Inventory</label>
-                            <input type="text" class="form-control @error('inventory_id') is-invalid @enderror" 
-                                id="inventory_id" name="inventory_id" value="{{ old('inventory_id', $rental->inventory_id) }}" placeholder="Enter inventory ID">
+                            <select class="form-control @error('inventory_id') is-invalid @enderror" 
+                                id="inventory_id" name="inventory_id">
+                                <option value="">Select Inventory</option>
+                                @foreach($inventories as $inventory)
+                                    <option value="{{ $inventory->inventory_id }}" 
+                                        {{ old('inventory_id', $rental->inventory_id) == $inventory->inventory_id ? 'selected' : '' }}>
+                                        {{ $inventory->inventory_id }} - {{ $inventory->film->title }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('inventory_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -49,8 +57,16 @@
 
                         <div class="form-group">
                             <label for="customer_id">Customer</label>
-                            <input type="text" class="form-control @error('customer_id') is-invalid @enderror" 
-                                id="customer_id" name="customer_id" value="{{ old('customer_id', $rental->customer_id) }}" placeholder="Enter customer ID">
+                            <select class="form-control @error('customer_id') is-invalid @enderror" 
+                                id="customer_id" name="customer_id">
+                                <option value="">Select Customer</option>
+                                @foreach($customers as $customer)
+                                    <option value="{{ $customer->customer_id }}" 
+                                        {{ old('customer_id', $rental->customer_id) == $customer->customer_id ? 'selected' : '' }}>
+                                        {{ $customer->customer_id }} - {{ $customer->first_name }} {{ $customer->last_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('customer_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -67,8 +83,16 @@
 
                         <div class="form-group">
                             <label for="staff_id">Staff</label>
-                            <input type="text" class="form-control @error('staff_id') is-invalid @enderror" 
-                                id="staff_id" name="staff_id" value="{{ old('staff_id', $rental->staff_id) }}" placeholder="Enter staff ID">
+                            <select class="form-control @error('staff_id') is-invalid @enderror" 
+                                id="staff_id" name="staff_id">
+                                <option value="">Select Staff</option>
+                                @foreach($staffs as $staff)
+                                    <option value="{{ $staff->staff_id }}" 
+                                        {{ old('staff_id', $rental->staff_id) == $staff->staff_id ? 'selected' : '' }}>
+                                        {{ $staff->staff_id }} - {{ $staff->first_name }} {{ $staff->last_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('staff_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

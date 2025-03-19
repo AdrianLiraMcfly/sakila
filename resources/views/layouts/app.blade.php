@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="dist/img/icon.png" type="image/x-icon">
     <title>Sakila Movies</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -15,6 +16,36 @@
         .content-wrapper {
             margin-left: 250px; /* Ancho del sidebar expandido */
             transition: margin-left 0.3s ease; /* Transición suave */
+        }
+
+        body {
+            background-color: #f4f4f4; /* Color de fondo de la página */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+ /* Color de fondo de la navbar */
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2; /* Color del texto en la navbar */
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd; /* Color de fondo al pasar el ratón */
+            color: black; /* Color del texto al pasar el ratón */
+        }
+
+        .content {
+            padding: 20px;
         }
 
         .sidebar-collapse .content-wrapper {

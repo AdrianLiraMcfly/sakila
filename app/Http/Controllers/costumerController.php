@@ -28,11 +28,12 @@ class costumerController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
-            'adress_id' => 'required',
+            'address_id' => 'required',
+            'store_id' => 'required',
             'active' => 'required',
         ]);
         customer::create($request->all());
-        return redirect()->route('costumers.index');
+        return redirect()->route('customers.index');
     }
     public function edit(customer $customer)
     {
@@ -46,15 +47,16 @@ class costumerController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
-            'adress_id' => 'required',
+            'address_id' => 'required',
+            'store_id' => 'required',
             'active' => 'required',
         ]);
         $customer->update($request->all());
-        return redirect()->route('costumers.index');
+        return redirect()->route('customers.index');
     }
     public function destroy(customer $customer)
     {
         $customer->delete();
-        return redirect()->route('costumers.index');
+        return redirect()->route('customers.index');
     }
 }

@@ -48,8 +48,15 @@
 
                         <div class="form-group">
                             <label for="address_id">Address ID</label>
-                            <input type="text" class="form-control @error('address_id') is-invalid @enderror" 
-                                id="address_id" name="address_id" value="{{ old('address_id') }}" placeholder="Enter address ID">
+                            <select class="form-control @error('address_id') is-invalid @enderror" 
+                                id="address_id" name="address_id">
+                                <option value="">Select address</option>
+                                @foreach($addresses as $address)
+                                    <option value="{{ $address->address_id }}" {{ old('address_id') == $address->address_id ? 'selected' : '' }}>
+                                        {{ $address->address }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('address_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -66,8 +73,13 @@
 
                         <div class="form-group">
                             <label for="store_id">Store ID</label>
-                            <input type="text" class="form-control @error('store_id') is-invalid @enderror" 
-                                id="store_id" name="store_id" value="{{ old('store_id') }}" placeholder="Enter store ID">
+                            <select class="form-control @error('store_id') is-invalid @enderror" 
+                                id="store_id" name="store_id" value="{{ old('store_id') }}">
+                                <option value="">Select Store ID</option>
+                                @foreach ($stores as $store)
+                                    <option value="{{ $store->store_id }}">{{ $store->store_id }}</option>
+                                @endforeach
+                            </select>
                             @error('store_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -75,8 +87,12 @@
 
                         <div class="form-group">
                             <label for="active">Active</label>
-                            <input type="text" class="form-control @error('active') is-invalid @enderror" 
-                                id="active" name="active" value="{{ old('active') }}" placeholder="Enter active status">
+                            <select class="form-control @error('active') is-invalid @enderror" 
+                                id="active" name="active" value="{{ old('active') }}">
+                                <option value="">Select Active</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
                             @error('active')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -87,6 +103,15 @@
                             <input type="text" class="form-control @error('username') is-invalid @enderror" 
                                 id="username" name="username" value="{{ old('username') }}" placeholder="Enter username">
                             @error('username')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                                id="password" name="password" value="{{ old('password') }}" placeholder="Enter password">
+                            @error('password')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>

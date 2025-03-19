@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label for="store">Store</label>
                             <select class="form-control @error('store') is-invalid @enderror" 
-                                    id="store" name="store" required>
+                                    id="store" name="store_id" required>
                                 <option value="">Select a Store</option>
                                 @foreach($stores as $store)
                                     <option value="{{ $store->store_id }}" {{ old('store') == $store->store_id ? 'selected' : '' }}>
@@ -86,6 +86,7 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
+                        
 
                         <div class="form-group">
                             <label for="active">Active</label>

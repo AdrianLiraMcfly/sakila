@@ -21,6 +21,8 @@ class LanguageController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+        Language::create($request->all());
+        return redirect()->route('languages.index');
     }
     public function edit(Language $language)
     {

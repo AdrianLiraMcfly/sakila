@@ -52,9 +52,13 @@
                                             <a href="{{ route('payments.edit', $payment->payment_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm delete-payment" data-id="{{ $payment->payment_id }}">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                            <form action="{{ route('payments.destroy', $payment->payment_id) }}" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this payment?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

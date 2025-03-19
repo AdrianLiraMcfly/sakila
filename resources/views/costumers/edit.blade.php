@@ -31,8 +31,8 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="store">Store</label>
-                            <select class="form-control @error('store') is-invalid @enderror" 
-                                    id="store" name="store" required>
+                            <select class="form-control @error('store_id') is-invalid @enderror" 
+                                    id="store_id" name="store_id" required>
                                 <option value="">Select a Store</option>
                                 @foreach($stores as $store)
                                     <option value="{{ $store->store_id }}" {{ old('store', $customer->store_id) == $store->store_id ? 'selected' : '' }}>
@@ -40,7 +40,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            @error('store')
+                            @error('store_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
@@ -65,7 +65,7 @@
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" 
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" 
                                 id="email" name="email" value="{{ old('email', $customer->email) }}" placeholder="Enter email">
                             @error('email')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -74,8 +74,8 @@
 
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <select class="form-control @error('address') is-invalid @enderror" 
-                                    id="address" name="address" required>
+                            <select class="form-control @error('address_id') is-invalid @enderror" 
+                                    id="address_id" name="address_id" required>
                                 <option value="">Select an Address</option>
                                 @foreach($addresses as $address)
                                     <option value="{{ $address->address_id }}" {{ old('address', $customer->address_id) == $address->address_id ? 'selected' : '' }}>
@@ -95,6 +95,7 @@
                                 <option value="">Select an Option</option>
                                 <option value="1" {{ old('active', $customer->active) == 1 ? 'selected' : '' }}>Yes</option>
                                 <option value="0" {{ old('active', $customer->active) == 0 ? 'selected' : '' }}>No</option>
+                            </select>
                             @error('active')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -103,7 +104,7 @@
 
                     <div class="card-footer d-flex justify-content-between">
                         <a href="{{ route('customers.index') }}" class="btn btn-secondary">
-                            <i class="fas fa-arrow-left"></i> Back
+                            <i class="fas fa-times"></i> Cancel
                         </a>
                         <button type="submit" class="btn btn-warning">
                             <i class="fas fa-save"></i> Update

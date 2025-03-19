@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><i class="fas fa-language"></i> Add Language</h1>
+                    <h1><i class="fas fa-name"></i> Add Language</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -29,15 +29,14 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="language">Language</label>
-                            <input type="text" class="form-control @error('language') is-invalid @enderror" 
-                                id="language" name="language" value="{{ old('language') }}" placeholder="Enter language">
-                            @error('language')
+                            <label for="name">Language</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                                id="name" name="name" value="{{ old('name') }}" placeholder="Enter name">
+                            @error('name')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-
                     <div class="card-footer d-flex justify-content-between">
                         <a href="{{ route('languages.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times"></i> Cancel

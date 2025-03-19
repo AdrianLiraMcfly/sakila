@@ -44,9 +44,13 @@
                                             <a href="{{ route('languages.edit', $language->language_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm delete-language" data-id="{{ $language->language_id }}">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                            <form action="{{ route('languages.destroy', $language->language_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this language?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -63,25 +67,4 @@
         </div>
     </section>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.delete-language').forEach(button => {
-            button.addEventListener('click', function() {
-                let languageId = this.getAttribute('data-id');
-                if (confirm('Are you sure you want to delete this language?')) {
-                    let form = document.createElement('form');
-                    form.action = `{{ url('languages') }}/${languageId}`;
-                    form.method = 'POST';
-                    form.innerHTML = `
-                        @csrf
-                        @method('DELETE')
-                    `;
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            });
-        });
-    });
-</script>
 @endsection

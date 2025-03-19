@@ -58,9 +58,13 @@
                                             <a href="{{ route('staffs.edit', $staff->staff_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm delete-staff" data-id="{{ $staff->staff_id }}">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                            <form action="{{ route('staffs.destroy', $staff->staff_id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this staff member?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

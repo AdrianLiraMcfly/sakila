@@ -81,7 +81,7 @@
                 let customerId = this.getAttribute('data-id');
                 if (confirm('Are you sure you want to delete this customer?')) {
                     let form = document.createElement('form');
-                    form.action = `{{ url('customers') }}/${customerId}`;
+                    form.action = `{{ url('customer') }}/${customerId}`;
                     form.method = 'POST';
                     form.innerHTML = `
                         @csrf

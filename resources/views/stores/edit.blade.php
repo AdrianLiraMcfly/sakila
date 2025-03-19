@@ -31,8 +31,15 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="manager_staff_id">Manager Staff ID</label>
-                            <input type="text" class="form-control @error('manager_staff_id') is-invalid @enderror" 
-                                id="manager_staff_id" name="manager_staff_id" value="{{ old('manager_staff_id', $store->manager_staff_id) }}" placeholder="Enter manager staff ID">
+                            <select class="form-control @error('manager_staff_id') is-invalid @enderror" 
+                                id="manager_staff_id" name="manager_staff_id">
+                                <option value="">-- Select Manager Staff ID --</option>
+                                @foreach($staffs as $staff)
+                                    <option value="{{ $staff->staff_id }}" {{ old('manager_staff_id', $store->manager_staff_id) == $staff->staff_id ? 'selected' : '' }}>
+                                        {{ $staff->first_name }} {{ $staff->last_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('manager_staff_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -40,8 +47,15 @@
 
                         <div class="form-group">
                             <label for="address_id">Address ID</label>
-                            <input type="text" class="form-control @error('address_id') is-invalid @enderror" 
-                                id="address_id" name="address_id" value="{{ old('address_id', $store->address_id) }}" placeholder="Enter address ID">
+                            <select class="form-control @error('address_id') is-invalid @enderror" 
+                                id="address_id" name="address_id">
+                                <option value="">-- Select Address ID --</option>
+                                @foreach($addresses as $address)
+                                    <option value="{{ $address->address_id }}" {{ old('address_id', $store->address_id) == $address->address_id ? 'selected' : '' }}>
+                                        {{ $address->address }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('address_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

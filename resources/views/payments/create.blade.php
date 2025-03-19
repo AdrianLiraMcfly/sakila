@@ -30,8 +30,15 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="customer">Customer</label>
-                            <input type="text" class="form-control @error('customer') is-invalid @enderror" 
-                                id="customer" name="customer" value="{{ old('customer') }}" placeholder="Enter customer">
+                            <select class="form-control @error('customer') is-invalid @enderror" 
+                                id="customer_id" name="customer_id">
+                                <option value="">Select customer</option>
+                                @foreach($customers as $customer)
+                                    <option value="{{ $customer->customer_id }}" {{ old('customer') == $customer->customer_id ? 'selected' : '' }}>
+                                        {{ $customer->first_name }} {{ $customer->last_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('customer')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -39,8 +46,15 @@
 
                         <div class="form-group">
                             <label for="staff">Staff</label>
-                            <input type="text" class="form-control @error('staff') is-invalid @enderror" 
-                                id="staff" name="staff" value="{{ old('staff') }}" placeholder="Enter staff">
+                            <select class="form-control @error('staff') is-invalid @enderror" 
+                                id="staff_id" name="staff_id">
+                                <option value="">Select staff</option>
+                                @foreach($staffs as $staff)
+                                    <option value="{{ $staff->staff_id }}" {{ old('staff') == $staff->staff_id ? 'selected' : '' }}>
+                                        {{ $staff->first_name }} {{ $staff->last_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('staff')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -48,8 +62,15 @@
 
                         <div class="form-group">
                             <label for="rental">Rental</label>
-                            <input type="text" class="form-control @error('rental') is-invalid @enderror" 
-                                id="rental" name="rental" value="{{ old('rental') }}" placeholder="Enter rental">
+                            <select class="form-control @error('rental') is-invalid @enderror" 
+                                id="rental_id" name="rental_id">
+                                <option value="">Select rental</option>
+                                @foreach($rentals as $rental)
+                                    <option value="{{ $rental->rental_id }}" {{ old('rental') == $rental->rental_id ? 'selected' : '' }}>
+                                        {{ $rental->rental_id }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('rental')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -66,7 +87,7 @@
 
                         <div class="form-group">
                             <label for="payment_date">Payment Date</label>
-                            <input type="text" class="form-control @error('payment_date') is-invalid @enderror" 
+                            <input type="date" class="form-control @error('payment_date') is-invalid @enderror" 
                                 id="payment_date" name="payment_date" value="{{ old('payment_date') }}" placeholder="Enter payment date">
                             @error('payment_date')
                                 <span class="invalid-feedback">{{ $message }}</span>

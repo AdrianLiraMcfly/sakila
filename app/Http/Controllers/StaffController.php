@@ -18,7 +18,9 @@ class StaffController extends Controller
     }
     public function create()
     {
-        return view('staffs.create');
+        $stores = Store::all();
+        $addresses = Address::all();
+        return view('staffs.create', compact('stores', 'addresses'));
     }
     public function store(Request $request)
     {
@@ -37,7 +39,9 @@ class StaffController extends Controller
     }
     public function edit(Staff $staff)
     {
-        return view('staffs.edit', compact('staff'));
+        $stores = Store::all();
+        $addresses = Address::all();
+        return view('staffs.edit', compact('staff', 'stores', 'addresses'));
     }
     public function update(Request $request, Staff $staff)
     {
@@ -49,8 +53,11 @@ class StaffController extends Controller
             'email' => 'required',
             'active' => 'required',
             'username' => 'required',
-            'password' => 'required',
         ]);
+
+        if ($request->filled('password')) {
+            $staff->password = $request->password;
+        }
         $staff->update($request->all());
         return redirect()->route('staffs.index');
     }

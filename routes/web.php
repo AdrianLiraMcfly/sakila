@@ -99,7 +99,6 @@ Route::delete('/inventory/{inventory}', [inventoryController::class, 'destroy'])
 Route::get('/language', [languageController::class, 'index'])->name('languages.index');
 Route::get('/language/create', [languageController::class, 'create'])->name('languages.create');
 Route::post('/language', [languageController::class, 'store'])->name('languages.store');
-Route::get('/language/{language}', [languageController::class, 'show'])->name('languages.show');
 Route::get('/language/{language}/edit', [languageController::class, 'edit'])->name('languages.edit');
 Route::put('/language/{language}', [languageController::class, 'update'])->name('languages.update');
 Route::delete('/language/{language}', [languageController::class, 'destroy'])->name('languages.destroy');

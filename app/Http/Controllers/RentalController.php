@@ -20,7 +20,10 @@ class RentalController extends Controller
     }
     public function create()
     {
-        return view('rentals.create');
+        $inventories = Inventory::all();
+        $customers = Customer::all();
+        $staffs = Staff::all();
+        return view('rentals.create', compact('inventories', 'customers', 'staffs'));
     }
     public function store(Request $request)
     {
@@ -36,7 +39,10 @@ class RentalController extends Controller
     }
     public function edit(Rental $rental)
     {
-        return view('rentals.edit', compact('rental'));
+        $inventories = Inventory::all();
+        $customers = Customer::all();
+        $staffs = Staff::all();
+        return view('rentals.edit', compact('rental', 'inventories', 'customers', 'staffs'));
     }
     public function update(Request $request, Rental $rental)
     {

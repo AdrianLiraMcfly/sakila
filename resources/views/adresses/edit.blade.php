@@ -32,19 +32,19 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="adress">Adress</label>
-                                    <input type="text" class="form-control @error('adress') is-invalid @enderror" 
-                                        id="adress" name="adress" value="{{ old('adress', $adress->address) }}" placeholder="Enter adress">
-                                    @error('adress')
+                                    <label for="address">Adress</label>
+                                    <input type="text" class="form-control @error('address') is-invalid @enderror" 
+                                        id="address" name="address" value="{{ old('address', $adress->address) }}" placeholder="Enter address">
+                                    @error('address')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="adress2">Adress2</label>
-                                    <input type="text" class="form-control @error('adress2') is-invalid @enderror" 
-                                        id="adress2" name="adress2" value="{{ old('adress2', $adress->address2) }}" placeholder="Enter adress2">
-                                    @error('adress2')
+                                    <label for="address2">Adress2</label>
+                                    <input type="text" class="form-control @error('address2') is-invalid @enderror" 
+                                        id="address2" name="address2" value="{{ old('address2', $adress->address2) }}" placeholder="Enter address2">
+                                    @error('address2')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -62,8 +62,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="city_id">City ID</label>
-                                    <input type="text" class="form-control @error('city_id') is-invalid @enderror" 
-                                        id="city_id" name="city_id" value="{{ old('city_id', $adress->city_id) }}" placeholder="Enter city ID">
+                                    <select class="form-control @error('city_id') is-invalid @enderror" 
+                                        id="city_id" name="city_id">
+                                        <option value="">Select city</option>
+                                        @foreach($cities as $city)
+                                            <option value="{{ $city->city_id }}" {{ old('city_id', $adress->city_id) == $city->city_id ? 'selected' : '' }}>
+                                                {{ $city->city }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     @error('city_id')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror

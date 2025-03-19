@@ -2,7 +2,7 @@
 <!-- Brand Logo -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background: linear-gradient(to bottom, #000000, #333333); position: fixed; top: 0; left: 0; height: 100%; overflow-y: auto;">
       
-<a href="#" class="brand-link">
+<a href="{{route('home')}}" class="brand-link">
         <img src="dist/img/icon.png" alt="Cinema Studio Logo" class="brand-image img-circle elevation-3" style="opacity: .8; filter: invert(1);">
         <span class="brand-text font-weight-light">Sakila Movies</span>
         </a>

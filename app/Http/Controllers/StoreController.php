@@ -18,12 +18,14 @@ class StoreController extends Controller
     }
     public function create()
     {
-        return view('stores.create');
+        $staffs = Staff::all();
+        $addresses = Address::all();
+        return view('stores.create', compact('staffs', 'addresses'));
     }
     public function store(Request $request)
     {
         $request->validate([
-            'manager_staff_id' => 'required',
+            'manager_staff_id' => 'required|unique:store,manager_staff_id',
             'address_id' => 'required',
         ]);
         Store::create($request->all());
@@ -31,12 +33,14 @@ class StoreController extends Controller
     }
     public function edit(Store $store)
     {
-        return view('stores.edit', compact('store'));
+        $staffs = Staff::all();
+        $addresses = Address::all();
+        return view('stores.edit', compact('store', 'staffs', 'addresses'));
     }
     public function update(Request $request, Store $store)
     {
         $request->validate([
-            'manager_staff_id' => 'required',
+            'manager_staff_id' => 'required|unique:store,manager_staff_id',
             'address_id' => 'required',
         ]);
         $store->update($request->all());

@@ -22,13 +22,14 @@ class adressController extends Controller
     
     public function create()
     {
-        return view('adresses.create');
+        $cities = City::all();
+        return view('adresses.create', compact('cities'));
     }
     public function store(Request $request)
     {
         $request->validate([
-            'adress' => 'required',
-            'adress2' => 'required',
+            'address' => 'required',
+            'address2' => 'required',
             'district' => 'required',
             'city_id' => 'required',
             'postal_code' => 'required',
@@ -40,14 +41,15 @@ class adressController extends Controller
     
     public function edit(Address $adress)
     {
-        return view('adresses.edit', compact('adress'));
+        $cities = City::all();
+        return view('adresses.edit', compact('adress', 'cities'));
     }
 
     public function update(Request $request, Address $adress)
     {
         $request->validate([
-            'adress' => 'required',
-            'adress2' => 'required',
+            'address' => 'required',
+            'address2' => 'required',
             'district' => 'required',
             'city_id' => 'required',
             'postal_code' => 'required',

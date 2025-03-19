@@ -20,7 +20,10 @@ class PaymentController extends Controller
     }
     public function create()
     {
-        return view('payments.create');
+        $customers = Customer::all();
+        $staffs = Staff::all();
+        $rentals = Rental::all();
+        return view('payments.create', compact('customers', 'staffs', 'rentals'));
     }
     public function store(Request $request)
     {
@@ -36,7 +39,10 @@ class PaymentController extends Controller
     }
     public function edit(Payment $payment)
     {
-        return view('payments.edit', compact('payment'));
+        $customers = Customer::all();
+        $staffs = Staff::all();
+        $rentals = Rental::all();
+        return view('payments.edit', compact('payment', 'customers', 'staffs', 'rentals'));
     }
     public function update(Request $request, Payment $payment)
     {

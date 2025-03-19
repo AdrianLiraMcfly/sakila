@@ -31,16 +31,9 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="language_id">Language</label>
-                            <select class="form-control @error('language_id') is-invalid @enderror" 
-                                    id="language_id" name="language_id" required>
-                                <option value="">Select a Language</option>
-                                @foreach($languages as $lang)
-                                    <option value="{{ $lang->language_id }}" 
-                                            {{ old('language_id', $language->language_id) == $lang->language_id ? 'selected' : '' }}>
-                                        {{ $lang->name }} <!-- Muestra el nombre del idioma -->
-                                    </option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control @error('language_id') is-invalid @enderror" 
+                                   id="name" name="name" 
+                                   value="{{ old('language_id', $language->name) }}" required>
                             @error('language_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

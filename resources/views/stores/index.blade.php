@@ -48,9 +48,13 @@
                                             <a href="{{ route('stores.edit', $store->store_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm delete-store" data-id="{{ $store->store_id }}">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                            <form action="{{ route('stores.destroy', $store->store_id) }}" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this store?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -67,25 +71,4 @@
         </div>
     </section>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.delete-store').forEach(button => {
-            button.addEventListener('click', function() {
-                let storeId = this.getAttribute('data-id');
-                if (confirm('Are you sure you want to delete this store?')) {
-                    let form = document.createElement('form');
-                    form.action = `{{ url('stores') }}/${storeId}`;
-                    form.method = 'POST';
-                    form.innerHTML = `
-                        @csrf
-                        @method('DELETE')
-                    `;
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            });
-        });
-    });
-</script>
 @endsection

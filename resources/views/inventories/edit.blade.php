@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><i class="fas fa-boxes"></i> Edit Inventory</h1>
+                    <h1><i class="fas fa-edit"></i> Edit Inventory</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -30,12 +30,12 @@
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="film_id">Film</label>
+                            <label for="film">Film</label>
                             <select class="form-control @error('film_id') is-invalid @enderror" 
-                                id="film_id" name="film_id">
-                                <option value="">Select Film</option>
-                                @foreach ($films as $film)
-                                    <option value="{{ $film->film_id }}" {{ $film->film_id == $inventory->film_id ? 'selected' : '' }}>
+                                    id="film_id" name="film_id" required>
+                                <option value="">Select a Film</option>
+                                @foreach($films as $film)
+                                    <option value="{{ $film->film_id }}" {{ old('film_id', $inventory->film_id) == $film->film_id ? 'selected' : '' }}>
                                         {{ $film->title }}
                                     </option>
                                 @endforeach
@@ -46,15 +46,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="store_id">Store</label>
+                            <label for="store">Store</label>
                             <select class="form-control @error('store_id') is-invalid @enderror" 
-                                id="store_id" name="store_id">
-                                <option value="">Select Store</option>
-                                @foreach ($stores as $store)
-                                    <option value="{{ $store->store_id }}" {{ $store->store_id == $inventory->store_id ? 'selected' : '' }}>
+                                    id="store_id" name="store_id" required>
+                                <option value="">Select a Store</option>
+                                @foreach($stores as $store)
+                                    <option value="{{ $store->store_id }}" {{ old('store_id', $inventory->store_id) == $store->store_id ? 'selected' : '' }}>
                                         {{ $store->store_id }}
                                     </option>
                                 @endforeach
+                            </select>
                             @error('store_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -63,7 +64,7 @@
 
                     <div class="card-footer d-flex justify-content-between">
                         <a href="{{ route('inventories.index') }}" class="btn btn-secondary">
-                            <i class="fas fa-arrow-left"></i> Back
+                            <i class="fas fa-times"></i> Cancel
                         </a>
                         <button type="submit" class="btn btn-warning">
                             <i class="fas fa-save"></i> Update
