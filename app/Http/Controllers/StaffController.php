@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash; // Importar Hash para hashear contraseñas
 use App\Models\Staff;
 use App\Models\Store;
 use App\Models\Address;
+use App\Models\Role;
 
 class StaffController extends Controller
 {
@@ -15,14 +16,16 @@ class StaffController extends Controller
         $staffs = Staff::paginate(10);
         $stores = Store::all();
         $address = Address::all();
-        return view('staffs.index', compact('staffs', 'address', 'stores'));
+        $roles = Role::all();
+        return view('staffs.index', compact('staffs', 'address', 'stores', 'roles'));
     }
 
     public function create()
     {
         $stores = Store::all();
         $addresses = Address::all();
-        return view('staffs.create', compact('stores', 'addresses'));
+        $roles = Role::all();
+        return view('staffs.create', compact('stores', 'addresses', 'roles'));
     }
 
     public function store(Request $request)
@@ -35,6 +38,7 @@ class StaffController extends Controller
             'email' => 'required|email',
             'active' => 'required',
             'username' => 'required',
+            'role_id' => 'required',
             'password' => 'required|min:8', // Validar longitud mínima de la contraseña
         ]);
 
@@ -51,7 +55,8 @@ class StaffController extends Controller
     {
         $stores = Store::all();
         $addresses = Address::all();
-        return view('staffs.edit', compact('staff', 'stores', 'addresses'));
+        $roles = Role::all();
+        return view('staffs.edit', compact('staff', 'stores', 'addresses', 'roles'));
     }
 
     public function update(Request $request, Staff $staff)
@@ -63,6 +68,7 @@ class StaffController extends Controller
             'store_id' => 'required',
             'email' => 'required|email',
             'active' => 'required',
+            'role_id' => 'required',
             'username' => 'required',
         ]);
 

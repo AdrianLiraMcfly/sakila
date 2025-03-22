@@ -39,6 +39,7 @@
                                     <th>Email</th>
                                     <th>Store ID</th>
                                     <th>Active</th>
+                                    <th>Rol</th>
                                     <th>Username</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
@@ -53,6 +54,7 @@
                                         <td>{{ $staff->email }}</td>
                                         <td>{{ $staff->store_id }}</td>
                                         <td>{{ $staff->active }}</td>
+                                        <td>{{ $staff->role ? $staff->role->name : 'No Role Assigned' }}</td>
                                         <td>{{ $staff->username }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('staffs.edit', $staff->staff_id) }}" class="btn btn-warning btn-sm">

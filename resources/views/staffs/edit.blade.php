@@ -98,6 +98,20 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="role_id">Rol</label>
+                            <select class="form-control @error('role_id') is-invalid @enderror" 
+                                id="role_id" name="role_id" value="{{ old('role_id', $staff->role_id) }}" placeholder="Select role">
+                                <option value="">Select role</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('role_id')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control @error('username') is-invalid @enderror" 
                                 id="username" name="username" value="{{ old('username', $staff->username) }}" placeholder="Enter username">

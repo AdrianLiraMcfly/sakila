@@ -47,6 +47,6 @@
     </form>
 
     <p class="mb-1">
-        <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+        <a href="{{ route('password.forgot') }}">¿Olvidaste tu contraseña?</a>
     </p>
 @endsection

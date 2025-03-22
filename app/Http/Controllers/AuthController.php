@@ -76,20 +76,85 @@ class AuthController extends Controller
     }
 
     public function verifyTwoFactorCode(Request $request)
-{
-    $user = Auth::user();
-    if (Hash::check($request->code, $user->two_factor_code) && now()->lt($user->two_factor_expires_at)) {
+    {
+        $user = Auth::user();
+        if (Hash::check($request->code, $user->two_factor_code) && now()->lt($user->two_factor_expires_at)) {
+            $user->two_factor_code = null;
+            $user->two_factor_expires_at = null;
+            $user->save();
+
+            // Generar el token JWT
+            $token = JWTAuth::fromUser($user);
+            session(['jwt_token' => $token]);
+
+            return redirect()->route('home');
+        }
+        return redirect()->back()->withErrors(['code' => 'Código incorrecto o expirado']);
+    }
+
+    public function showForgotPasswordForm()
+    {
+        return view('auth.forgot-password');
+    }
+
+    // Enviar código de recuperación por correo
+    public function sendResetCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:staff,email',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $user = Staff::where('email', $request->email)->first();
+
+        // Generar código de verificación
+        $code = rand(100000, 999999);
+        $user->two_factor_code = bcrypt($code);
+        $user->two_factor_expires_at = now()->addMinutes(10);
+        $user->save();
+
+        // Enviar correo con el código
+        Mail::to($user->email)->send(new TwoFactorCodeMail($code));
+
+        return redirect()->route('password.reset')->with('message', 'Código de verificación enviado a tu correo.');
+    }
+
+    // Mostrar formulario para restablecer contraseña
+    public function showResetPasswordForm()
+    {
+        return view('auth.reset-password');
+    }
+
+    // Restablecer la contraseña
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:staff,email',
+            'code' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $user = Staff::where('email', $request->email)->first();
+
+        // Verificar el código de recuperación
+        if (!Hash::check($request->code, $user->two_factor_code) || now()->gt($user->two_factor_expires_at)) {
+            return redirect()->back()->withErrors(['code' => 'El código es incorrecto o ha expirado.']);
+        }
+
+        // Restablecer la contraseña
+        $user->password = Hash::make($request->password);
         $user->two_factor_code = null;
         $user->two_factor_expires_at = null;
         $user->save();
 
-        // Generar el token JWT
-        $token = JWTAuth::fromUser($user);
-        session(['jwt_token' => $token]);
-
-        return redirect()->route('home');
+        return redirect()->route('login')->with('message', 'Contraseña restablecida correctamente. Ahora puedes iniciar sesión.');
     }
-    return redirect()->back()->withErrors(['code' => 'Código incorrecto o expirado']);
-}
 }
 

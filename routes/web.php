@@ -44,15 +44,19 @@ Auth::routes();
             Route::get('login', function () {
             return view('auth.login');
         })->name('login');
-        
-        Route::get('2fa', function () {
-            return view('auth.verify-2fa');
-        })->name('2fa.verify');
 
         Route::post('verify', [AuthController::class, 'verify'])->name('verify');
     });
 
+    Route::get('2fa', function () {
+        return view('auth.verify-2fa');
+    })->name('2fa.verify');
+
 Route::post('2fa', [AuthController::class, 'verifyTwoFactorCode'])->name('2fa.verification');
+Route::get('password/forgot', [AuthController::class, 'showForgotPasswordForm'])->name('password.forgot');
+Route::post('password/forgot', [AuthController::class, 'sendResetCode'])->name('password.sendResetCode');
+Route::get('password/reset', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('password/reset', [AuthController::class, 'resetPassword'])->name('password.update');
 
 Route::middleware(['auth'])->group(function () {
 Route::get('home', [homecontroller::class, 'index'])->name('home');
