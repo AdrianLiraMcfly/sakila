@@ -11,19 +11,9 @@
 
             <form action="{{ route('password.update') }}" method="POST">
                 @csrf
-                <div class="input-group mb-3">
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Correo electrónico" required>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+
+                <!-- Mostrar el correo almacenado en la sesión -->
+                <input type="hidden" name="email" value="{{ session('reset_email') }}">
 
                 <div class="input-group mb-3">
                     <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" placeholder="Código de verificación" required>

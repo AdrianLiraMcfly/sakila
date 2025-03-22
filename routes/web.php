@@ -37,8 +37,6 @@ Route::get('/', function () {
 
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Auth::routes();
-
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
         Route::middleware(['guest'])->group(function () {
             Route::get('login', function () {

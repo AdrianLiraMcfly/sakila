@@ -116,6 +116,9 @@ class AuthController extends Controller
         $user->two_factor_expires_at = now()->addMinutes(10);
         $user->save();
 
+        // Guardar el correo en la sesión
+        session(['reset_email' => $request->email]);
+
         // Enviar correo con el código
         Mail::to($user->email)->send(new TwoFactorCodeMail($code));
 
@@ -132,7 +135,6 @@ class AuthController extends Controller
     public function resetPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|exists:staff,email',
             'code' => 'required',
             'password' => 'required|min:8|confirmed',
         ]);
@@ -141,7 +143,13 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user = Staff::where('email', $request->email)->first();
+        // Obtener el correo de la sesión
+        $email = session('reset_email');
+        if (!$email) {
+            return redirect()->route('password.forgot')->withErrors(['email' => 'No se encontró un correo asociado a esta solicitud.']);
+        }
+
+        $user = Staff::where('email', $email)->first();
 
         // Verificar el código de recuperación
         if (!Hash::check($request->code, $user->two_factor_code) || now()->gt($user->two_factor_expires_at)) {
@@ -153,6 +161,9 @@ class AuthController extends Controller
         $user->two_factor_code = null;
         $user->two_factor_expires_at = null;
         $user->save();
+
+        // Limpiar la sesión
+        session()->forget('reset_email');
 
         return redirect()->route('login')->with('message', 'Contraseña restablecida correctamente. Ahora puedes iniciar sesión.');
     }
