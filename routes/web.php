@@ -17,6 +17,7 @@ use App\Http\Controllers\rentalController;
 use App\Http\Controllers\staffController;
 use App\Http\Controllers\storeController;
 use App\Http\Controllers\homecontroller;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,34 @@ use App\Http\Controllers\homecontroller;
 |
 */
 
-Route::get('/', [homecontroller::class, 'index'])->name('home');
+Route::get('/', function () {
+    return redirect('login');
+});
 
+
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::middleware(['guest'])->group(function () {
+            Route::get('login', function () {
+            return view('auth.login');
+        })->name('login');
+        
+        Route::get('2fa', function () {
+            return view('auth.verify-2fa');
+        })->name('2fa.verify');
+
+        Route::post('verify', [AuthController::class, 'verify'])->name('verify');
+    });
+
+Route::post('2fa', [AuthController::class, 'verifyTwoFactorCode'])->name('2fa.verification');
+
+Route::middleware(['auth'])->group(function () {
+Route::get('home', [homecontroller::class, 'index'])->name('home');
+
+    
 Route::get('/actors', [actorController::class, 'index'])->name('actors.index');
 Route::get('/actors/create', [actorController::class, 'create'])->name('actors.create');
 Route::post('/actors', [actorController::class, 'store'])->name('actors.store');
@@ -134,3 +161,7 @@ Route::get('/store/{store}', [storeController::class, 'show'])->name('stores.sho
 Route::get('/store/{store}/edit', [storeController::class, 'edit'])->name('stores.edit');
 Route::put('/store/{store}', [storeController::class, 'update'])->name('stores.update');
 Route::delete('/store/{store}', [storeController::class, 'destroy'])->name('stores.destroy');
+
+
+});
+
