@@ -56,6 +56,15 @@
                             </a>
                         </li>
 
+                        <!-- Inventories -->
+                        <li class="nav-item">
+                            <a href="{{ route('inventories.index') }}" class="nav-link {{ Request::is('inventory*') ? 'active' : '' }}">
+                                <i class="nav-icon far fa-circle text-success"></i>
+                                <p>Inventories</p>
+                            </a>
+                        </li>
+                        
+
                         <!-- Categories -->
                         <li class="nav-item">
                             <a href="{{ route('categories.index') }}" class="nav-link {{ Request::is('categories*') ? 'active' : '' }}">
@@ -64,6 +73,7 @@
                             </a>
                         </li>
 
+                        @if(session('role_id') != 2)
                         <!-- Addresses -->
                         <li class="nav-item">
                             <a href="{{ route('adresses.index') }}" class="nav-link {{ Request::is('adresses*') ? 'active' : '' }}">
@@ -96,13 +106,6 @@
                             </a>
                         </li>
 
-                        <!-- Inventories -->
-                        <li class="nav-item">
-                            <a href="{{ route('inventories.index') }}" class="nav-link {{ Request::is('inventory*') ? 'active' : '' }}">
-                                <i class="nav-icon far fa-circle text-success"></i>
-                                <p>Inventories</p>
-                            </a>
-                        </li>
 
                         <!-- Languages -->
                         <li class="nav-item">
@@ -143,6 +146,7 @@
                                 <p>Stores</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
             </ul>

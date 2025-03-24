@@ -23,9 +23,11 @@
             <div class="card card-primary card-outline">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title"><i class="fas fa-list"></i> List of Stores</h3>
+                    @if(session('role_id') !=3)
                     <a href="{{ route('stores.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i> Add Store
                     </a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -35,7 +37,9 @@
                                     <th>Store ID</th>
                                     <th>Manager Staff ID</th>
                                     <th>Address ID</th>
+                                    @if(session('role_id') !=3)
                                     <th class="text-center">Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,6 +48,7 @@
                                         <td>{{ $store->store_id }}</td>
                                         <td>{{ $store->manager_staff_id }}</td>
                                         <td>{{ $store->address->address }}</td>
+                                        @if(session('role_id') !=3)
                                         <td class="text-center">
                                             <a href="{{ route('stores.edit', $store->store_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
@@ -56,6 +61,7 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

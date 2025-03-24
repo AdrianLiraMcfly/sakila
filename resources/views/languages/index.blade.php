@@ -23,9 +23,11 @@
             <div class="card card-primary card-outline">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title"><i class="fas fa-list"></i> List of Languages</h3>
+                    @if(session('role_id') !=3)
                     <a href="{{ route('languages.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i> Add Language
                     </a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -33,13 +35,16 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Language</th>
+                                    @if(session('role_id') !=3)
                                     <th class="text-center">Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($languages as $language)
                                     <tr>
                                         <td>{{ $language->name }}</td>
+                                        @if(session('role_id') !=3)
                                         <td class="text-center">
                                             <a href="{{ route('languages.edit', $language->language_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
@@ -52,6 +57,7 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

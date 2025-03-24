@@ -23,9 +23,11 @@
             <div class="card card-primary card-outline">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title"><i class="fas fa-list"></i> List of Customers</h3>
+                    @if(session('role_id') !=3)
                     <a href="{{ route('customers.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i> Add Customer
                     </a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -38,7 +40,9 @@
                                     <th>Email</th>
                                     <th>Address</th>
                                     <th>Active</th>
+                                    @if(session('role_id') !=3)
                                     <th class="text-center">Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,6 +54,7 @@
                                         <td>{{ $costumer->email }}</td>
                                         <td>{{ $costumer->address->address }}</td>
                                         <td>{{ $costumer->active ? 'Active' : 'Inactive' }}</td>
+                                        @if(session('role_id') !=3)
                                         <td class="text-center">
                                             <a href="{{ route('customers.edit', $costumer->customer_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
@@ -58,6 +63,7 @@
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

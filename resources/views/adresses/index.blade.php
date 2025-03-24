@@ -23,9 +23,11 @@
             <div class="card card-primary card-outline">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title"><i class="fas fa-list"></i> List of Addresses</h3>
+                    @if(session('role_id') !=3)
                     <a href="{{ route('adresses.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i> Add New Address
                     </a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -39,7 +41,9 @@
                                     <th>City ID</th>
                                     <th>Postal Code</th>
                                     <th>Phone</th>
+                                    @if(session('role_id') != 3)
                                     <th class="text-center">Actions</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +56,7 @@
                                         <td>{{ $adress->city->city }}</td>
                                         <td>{{ $adress->postal_code ? $adress->postal_code : 'No Postal Code' }}</td>
                                         <td>{{ $adress->phone ? $adress->phone : 'No Phone'}}</td>
+                                        @if(session('role_id') !=3)
                                         <td class="text-center">
                                             <a href="{{ route('adresses.edit', $adress->address_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>
@@ -60,6 +65,7 @@
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
