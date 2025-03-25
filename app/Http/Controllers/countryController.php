@@ -22,7 +22,7 @@ class countryController extends Controller
             'country' => 'required',
         ]);
         country::create($request->all());
-        return redirect()->route('countries.index');
+        return redirect()->route('countries.index')->with('success','Country created successfully.');
     }
     public function edit(country $country)
     {
@@ -34,11 +34,11 @@ class countryController extends Controller
             'country' => 'required',
         ]);
         $country->update($request->all());
-        return redirect()->route('countries.index');
+        return redirect()->route('countries.index')->with('warning','Country updated successfully');
     }
     public function destroy(country $country)
     {
         $country->delete();
-        return redirect()->route('countries.index');
+        return redirect()->route('countries.index')->with('success','Country deleted successfully');
     }
 }

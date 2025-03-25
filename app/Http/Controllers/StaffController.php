@@ -48,7 +48,7 @@ class StaffController extends Controller
 
         Staff::create($data);
 
-        return redirect()->route('staffs.index');
+        return redirect()->route('staffs.index')->with('success', 'Staff created successfully.');
     }
 
     public function edit(Staff $staff)
@@ -84,12 +84,12 @@ class StaffController extends Controller
 
         $staff->update($data);
 
-        return redirect()->route('staffs.index');
+        return redirect()->route('staffs.index')->with('warning', 'Staff updated successfully');
     }
 
     public function destroy(Staff $staff)
     {
         $staff->delete();
-        return redirect()->route('staffs.index');
+        return redirect()->route('staffs.index')->with('success', 'Staff deleted successfully');
     }
 }

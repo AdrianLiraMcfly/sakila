@@ -22,7 +22,7 @@ class categoryController extends Controller
             'name' => 'required',
         ]);
         category::create($request->all());
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('success','Category created successfully.');
     }
     public function edit(category $category)
     {
@@ -34,11 +34,11 @@ class categoryController extends Controller
             'name' => 'required',
         ]);
         $category->update($request->all());
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('warning','Category updated successfully');
     }
     public function destroy(category $category)
     {
         $category->delete();
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('success','Category deleted successfully');
     }
 }

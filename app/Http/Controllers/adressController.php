@@ -36,7 +36,7 @@ class adressController extends Controller
             'phone' => 'required',
         ]);
         Address::create($request->all());
-        return redirect()->route('adresses.index');
+        return redirect()->route('adresses.index')->with('success', 'Address created successfully.');
     }
     
     public function edit(Address $adress)
@@ -56,11 +56,11 @@ class adressController extends Controller
             'phone' => 'required',
         ]);
         $adress->update($request->all());
-        return redirect()->route('adresses.index');
+        return redirect()->route('adresses.index')->with('warning', 'Address updated successfully.');
     }
     public function destroy(Address $adress)
     {
         $adress->delete();
-        return redirect()->route('adresses.index');
+        return redirect()->route('adresses.index')->with('success', 'Address deleted successfully.');
     }
 }

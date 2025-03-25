@@ -24,7 +24,7 @@ class actorController extends Controller
             'last_name' => 'required',
         ]);
         Actor::create($request->all());
-        return redirect()->route('actors.index');
+        return redirect()->route('actors.index')->with('success', 'Actor created successfully.');
     }
     public function edit(Actor $actor)
     {
@@ -37,11 +37,11 @@ class actorController extends Controller
             'last_name' => 'required',
         ]);
         $actor->update($request->all());
-        return redirect()->route('actors.index');
+        return redirect()->route('actors.index')->with('warning', 'Actor updated successfully.');
     }
     public function destroy(Actor $actor)
     {
         $actor->delete();
-        return redirect()->route('actors.index');
+        return redirect()->route('actors.index')->with('success', 'Actor deleted successfully.');
     }
 }

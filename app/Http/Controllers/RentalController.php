@@ -35,7 +35,7 @@ class RentalController extends Controller
             'return_date' => 'required',
         ]);
         Rental::create($request->all());
-        return redirect()->route('rentals.index');
+        return redirect()->route('rentals.index')->with('success','Rental created successfully.');
     }
     public function edit(Rental $rental)
     {
@@ -54,11 +54,11 @@ class RentalController extends Controller
             'return_date' => 'required',
         ]);
         $rental->update($request->all());
-        return redirect()->route('rentals.index');
+        return redirect()->route('rentals.index')->with('warning','Rental updated successfully');
     }
     public function destroy(Rental $rental)
     {
         $rental->delete();
-        return redirect()->route('rentals.index');
+        return redirect()->route('rentals.index')->with('success','Rental deleted successfully');
     }
 }

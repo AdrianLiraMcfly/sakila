@@ -29,13 +29,13 @@ class InventoryController extends Controller
             'film_id' => 'required',
         ]);
         Inventory::create($request->all());
-        return redirect()->route('inventories.index');
+        return redirect()->route('inventories.index')->with('success','Inventory created successfully.');
     }
     public function edit(Inventory $inventory)
     {
         $stores = Store::all();
         $films = Film::all();
-        return view('inventories.edit', compact('inventory', 'stores', 'films'));
+        return view('inventories.edit', compact('inventory', 'stores', 'films'))->with('warning','Inventory updated successfully');
     }
     public function update(Request $request, Inventory $inventory)
     {
@@ -49,6 +49,6 @@ class InventoryController extends Controller
     public function destroy(Inventory $inventory)
     {
         $inventory->delete();
-        return redirect()->route('inventories.index');
+        return redirect()->route('inventories.index')->with('success','Inventory deleted successfully');
     }
 }

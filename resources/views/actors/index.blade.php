@@ -23,7 +23,7 @@
             <div class="card card-primary card-outline">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title"><i class="fas fa-list"></i> List of Actors</h3>
-                    @if(session('role_id') !=3)
+                    @if(session('role_id') !=3 && session('role_id') != 2)
                     <a href="{{ route('actors.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i> Add New Actor
                     </a>
@@ -37,7 +37,7 @@
                                     <th>#</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
-                                    @if(session('role_id') != 3)
+                                    @if(session('role_id') != 3 && session('role_id') != 2)
                                         <th class="text-center">Actions</th>
                                     @endif
                                 </tr>
@@ -48,7 +48,7 @@
                                         <td>{{ $actor->actor_id }}</td>
                                         <td>{{ $actor->first_name }}</td>
                                         <td>{{ $actor->last_name }}</td>
-                                        @if(session('role_id') != 3)
+                                        @if(session('role_id') != 3 && session('role_id') != 2)
                                         <td class="text-center">
                                             <a href="{{ route('actors.edit', $actor->actor_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>

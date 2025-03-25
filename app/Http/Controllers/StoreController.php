@@ -29,7 +29,7 @@ class StoreController extends Controller
             'address_id' => 'required',
         ]);
         Store::create($request->all());
-        return redirect()->route('stores.index');
+        return redirect()->route('stores.index')->with('success','Store created successfully.');
     }
     public function edit(Store $store)
     {
@@ -44,11 +44,11 @@ class StoreController extends Controller
             'address_id' => 'required',
         ]);
         $store->update($request->all());
-        return redirect()->route('stores.index');
+        return redirect()->route('stores.index')->with('warning','Store updated successfully');
     }
     public function destroy(Store $store)
     {
         $store->delete();
-        return redirect()->route('stores.index');
+        return redirect()->route('stores.index')->with('success','Store deleted successfully');
     }
 }

@@ -23,7 +23,7 @@
             <div class="card card-primary card-outline">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title"><i class="fas fa-list"></i> List of Inventories</h3>
-                    @if(session('role_id') !=3)
+                    @if(session('role_id') !=3 && session('role_id') != 2)
                     <a href="{{ route('inventories.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i> Add Inventory
                     </a>
@@ -36,7 +36,7 @@
                                 <tr>
                                     <th>Film</th>
                                     <th>Store</th>
-                                    @if(session('role_id') !=3)
+                                    @if(session('role_id') !=3 && session('role_id') != 2)
                                     <th class="text-center">Actions</th>
                                     @endif
                                 </tr>
@@ -46,7 +46,7 @@
                                     <tr>
                                         <td>{{ $inventory->film->title }}</td>
                                         <td>{{ $inventory->store_id }}</td>
-                                        @if(session('role_id') !=3)
+                                        @if(session('role_id') !=3 && session('role_id') != 2)
                                         <td class="text-center">
                                             <a href="{{ route('inventories.edit', $inventory->inventory_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>

@@ -23,7 +23,7 @@
             <div class="card card-primary card-outline">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title"><i class="fas fa-list"></i> List of Films</h3>
-                    @if(session('role_id') !=3)
+                    @if(session('role_id') !=3 && session('role_id') != 2)
                     <a href="{{ route('films.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i> Add New Film
                     </a>
@@ -44,7 +44,7 @@
                                     <th>Replacement Cost</th>
                                     <th>Special Features</th>
                                     <th>Language</th>
-                                    @if(session('role_id') !=3)
+                                    @if(session('role_id') !=3 && session('role_id') != 2)
                                     <th class="text-center">Actions</th>
                                     @endif
                                 </tr>
@@ -62,7 +62,7 @@
                                         <td>{{ $film->replacement_cost }}</td>
                                         <td>{{ $film->special_features }}</td>
                                         <td>{{ $film->language ? $film->language->name : 'No Language' }}</td>
-                                        @if(session('role_id') !=3)
+                                        @if(session('role_id') !=3 && session('role_id') != 2)
                                         <td class="text-center">
                                             <a href="{{ route('films.edit', $film->film_id) }}" class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i>

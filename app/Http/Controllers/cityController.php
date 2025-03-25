@@ -27,7 +27,7 @@ class cityController extends Controller
             'country_id' => 'required',
         ]);
         city::create($request->all());
-        return redirect()->route('cities.index');
+        return redirect()->route('cities.index')->with('success','City created successfully.');
     }
     public function edit(city $city)
     {
@@ -41,11 +41,11 @@ class cityController extends Controller
             'country_id' => 'required',
         ]);
         $city->update($request->all());
-        return redirect()->route('cities.index');
+        return redirect()->route('cities.index')->with('warning','City updated successfully');
     }
     public function destroy(city $city)
     {
         $city->delete();
-        return redirect()->route('cities.index');
+        return redirect()->route('cities.index')->with('success','City deleted successfully');
     }
 }

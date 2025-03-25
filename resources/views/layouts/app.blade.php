@@ -72,6 +72,21 @@
 
         <!-- Contenido Principal -->
         <div class="content-wrapper">
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('warning'))
+                <div class="alert alert-warning">
+                    {{ session('warning') }}
+                </div>
+            @endif
             <main class="content">
                 @yield('content')
             </main>

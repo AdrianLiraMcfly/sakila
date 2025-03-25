@@ -22,7 +22,7 @@ class LanguageController extends Controller
             'name' => 'required',
         ]);
         Language::create($request->all());
-        return redirect()->route('languages.index');
+        return redirect()->route('languages.index')->with('success','Language created successfully.');
     }
     public function edit(Language $language)
     {
@@ -36,11 +36,11 @@ class LanguageController extends Controller
             'name' => 'required',
         ]);
         $language->update($request->all());
-        return redirect()->route('languages.index');
+        return redirect()->route('languages.index')->with('warning','Language updated successfully');
     }
     public function destroy(Language $language)
     {
         $language->delete();
-        return redirect()->route('languages.index');
+        return redirect()->route('languages.index')->with('success','Language deleted successfully');
     }
 }

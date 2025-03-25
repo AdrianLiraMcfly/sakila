@@ -37,7 +37,7 @@ class filmController extends Controller
             'special_features' => 'required',
         ]);
         film::create($request->all());
-        return redirect()->route('films.index');
+        return redirect()->route('films.index')->with('success','Film created successfully.');
     }
     public function edit(film $film)
     {
@@ -59,11 +59,11 @@ class filmController extends Controller
             'special_features' => 'required',
         ]);
         $film->update($request->all());
-        return redirect()->route('films.index');
+        return redirect()->route('films.index')->with('warning','Film updated successfully');
     }
     public function destroy(film $film)
     {
         $film->delete();
-        return redirect()->route('films.index');
+        return redirect()->route('films.index')->with('success','Film deleted successfully');
     }
 }

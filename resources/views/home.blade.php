@@ -21,6 +21,13 @@
     <!-- Contenido principal -->
     <section class="content">
         <div class="container-fluid">
+            @if(session('role_id') == 2)
+            <!-- Mostrar solo para clientes -->
+                <div class="alert alert-info text-center">
+                    <h3>Welcome to Sakila Movies!</h3>
+                    <p>Thank you for being a valued customer. Explore our collection of movies and enjoy your experience!</p>
+                </div>
+            @else
             <div class="row">
                 
                 <!-- Widget: Total de Actores -->
@@ -106,33 +113,6 @@
     </div>
 </div>
 
-            <!-- Script para inicializar el gráfico -->
-            <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var ctx = document.getElementById('filmsChart').getContext('2d');
-        var filmsChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode($categories->pluck('name')) !!},
-                datasets: [{
-                    label: 'Films Count',
-                    data: {!! json_encode(array_values($films_per_category)) !!},
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: true }
-                }
-            }
-        });
-    });
-</script>
-
             <!-- Tabla de Últimos Alquileres -->
             <div class="card">
                 <div class="card-header">
@@ -161,5 +141,36 @@
                     </table>
                 </div>
             </div>
+            @endif
+        </div>
+    </section>
+</div>
+
+            <!-- Script para inicializar el gráfico -->
+            <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById('filmsChart').getContext('2d');
+        var filmsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($categories->pluck('name')) !!},
+                datasets: [{
+                    label: 'Films Count',
+                    data: {!! json_encode(array_values($films_per_category)) !!},
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    });
+</script>
 
 @endsection

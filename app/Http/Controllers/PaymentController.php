@@ -35,7 +35,7 @@ class PaymentController extends Controller
             'payment_date' => 'required',
         ]);
         Payment::create($request->all());
-        return redirect()->route('payments.index');
+        return redirect()->route('payments.index')->with('success','Payment created successfully.');
     }
     public function edit(Payment $payment)
     {
@@ -54,11 +54,11 @@ class PaymentController extends Controller
             'payment_date' => 'required',
         ]);
         $payment->update($request->all());
-        return redirect()->route('payments.index');
+        return redirect()->route('payments.index')->with('warning','Payment updated successfully');
     }
     public function destroy(Payment $payment)
     {
         $payment->delete();
-        return redirect()->route('payments.index');
+        return redirect()->route('payments.index')->with('success','Payment deleted successfully');
     }
 }

@@ -33,13 +33,13 @@ class costumerController extends Controller
             'active' => 'required',
         ]);
         customer::create($request->all());
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success','Customer created successfully.');
     }
     public function edit(customer $customer)
     {
         $addresses = address::all();
         $stores = store::all();
-        return view('costumers.edit', compact('customer', 'addresses', 'stores'));
+        return view('costumers.edit', compact('customer', 'addresses', 'stores'))->with('warning','Customer updated successfully');
     }
     public function update(Request $request, customer $customer)
     {
@@ -57,6 +57,6 @@ class costumerController extends Controller
     public function destroy(customer $customer)
     {
         $customer->delete();
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success','Customer deleted successfully');
     }
 }
