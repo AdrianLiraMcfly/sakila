@@ -8,6 +8,7 @@ use App\Models\Staff;
 use App\Models\Store;
 use App\Models\Address;
 use App\Models\Role;
+use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
@@ -37,10 +38,11 @@ class StaffController extends Controller
             'store_id' => 'required',
             'email' => 'required|email',
             'active' => 'required',
-            'username' => 'required',
+            'username' => 'required|min:2|max:7', // Validar longitud mínima del nombre de usuario
             'role_id' => 'required',
             'password' => 'required|min:8', // Validar longitud mínima de la contraseña
         ]);
+
 
         // Hashear la contraseña antes de guardar
         $data = $request->all();

@@ -39,6 +39,12 @@ class AuthController extends Controller
                             ->withInput();
         }
 
+        if (!$user->active){
+            return redirect()->back()
+                            ->withErrors(['email' => 'Usuario inactivo'])
+                            ->withInput();
+        }
+
         // Generar y enviar el código de 2FA
         $code = rand(100000, 999999);
         $user->two_factor_code = bcrypt($code);
